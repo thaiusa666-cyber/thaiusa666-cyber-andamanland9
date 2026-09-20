@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Admin · Andaman Land by Benz Supawat</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml"/>
+<script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+:root{
+  --ink:#0A2A31; --deep:#10454F; --sea:#1B6C79; --brass:#A8771F; --brass-l:#C89B3E;
+  --paper:#FCFBF8; --mist:#E3ECEC; --line:#CBD9D9; --text:#16303550; --danger:#9B2C2C;
+  --r:10px; box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:15px/1.55 ui-sans-serif,system-ui,"Karla","IBM Plex Sans Thai","Noto Sans SC",sans-serif}
+h1,h2,h3{font-family:ui-serif,Georgia,"Fraunces",serif;font-weight:600;line-height:1.2;margin:0 0 .5em}
+a{color:var(--sea)}
+header.top{background:var(--ink);color:#fff;padding:14px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+header.top b{letter-spacing:.14em;font-size:14px}
+header.top span{opacity:.7;font-size:12px;display:block;letter-spacing:.02em}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 20px 80px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line);margin:0 0 22px}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 14px;font:inherit;cursor:pointer;color:var(--deep)}
+.tabs button[aria-selected="true"]{border-color:var(--brass);font-weight:600;color:var(--ink)}
+.panel[hidden]{display:none}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.bar input[type=search]{flex:1;min-width:180px}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+label{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--deep);margin:0 0 5px}
+.btn{display:inline-block;border:1px solid var(--deep);background:var(--deep);color:#fff;padding:9px 16px;border-radius:999px;font:inherit;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn--brass{background:var(--brass);border-color:var(--brass)}
+.btn--ghost{background:transparent;color:var(--deep)}
+.btn--danger{background:transparent;border-color:var(--danger);color:var(--danger)}
+.btn--small{padding:6px 12px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--deep)}
+.tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:2px 9px;background:#fff}
+.tag--for-sale{border-color:#2F7D5B;color:#2F7D5B}
+.tag--reserved{border-color:var(--brass);color:var(--brass)}
+.tag--sold{border-color:var(--danger);color:var(--danger)}
+.tag--off-market{opacity:.65}
+.tag--sample{border-style:dashed}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+fieldset{border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:0 0 16px}
+legend{padding:0 8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+.note{background:var(--mist);border-left:3px solid var(--brass);padding:12px 14px;border-radius:0 8px 8px 0;font-size:14px}
+.muted{color:#4d6a6f;font-size:13px}
+dialog{border:0;border-radius:14px;padding:0;max-width:940px;width:calc(100% - 28px);box-shadow:0 30px 80px rgba(10,42,49,.35)}
+dialog::backdrop{background:rgba(6,24,29,.55)}
+.dlg-head{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:2}
+.dlg-body{padding:20px;max-height:70vh;overflow:auto}
+.dlg-foot{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:14px 20px;display:flex;gap:10px;justify-content:flex-end}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.langtabs{display:flex;gap:4px;margin-bottom:12px}
+.langtabs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;cursor:pointer;font:inherit}
+.langtabs button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.list-edit div{display:flex;gap:6px;margin-bottom:6px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:99}
+.toast.on{opacity:1}
+code{background:var(--mist);padding:1px 5px;border-radius:4px;font-size:13px}
+.login{max-width:380px;margin:12vh auto;padding:0 20px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#9aa;margin-right:6px;vertical-align:1px}
+.dot--on{background:#2F7D5B}
+.dot--off{background:var(--danger)}
+.statusline{font-size:12px;color:rgba(255,255,255,.75)}
+.spin{display:inline-block;width:13px;height:13px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (max-width:640px){
+  table thead{display:none}
+  table tr{display:block;border-bottom:1px solid var(--line);padding:10px 0}
+  table td{display:block;border:0;padding:3px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="login" id="login">
+  <h1>เข้าสู่ระบบหลังบ้าน</h1>
+  <p class="muted">Andaman Land by Benz Supawat</p>
+  <div class="card">
+    <label for="pw">รหัสผ่าน</label>
+    <input id="pw" type="password" autocomplete="current-password"/>
+    <p style="margin:12px 0 0"><button class="btn btn--brass" id="pwgo" type="button">เข้าสู่ระบบ</button></p>
+    <p class="muted" style="margin-top:12px">รหัสผ่านเริ่มต้น: <code>andaman</code> — เปลี่ยนได้ที่ <code>admin/index.html</code> (ตัวแปร <code>PASSCODE</code>)</p>
+  </div>
+  <div class="note">รหัสนี้แค่ซ่อนหน้าจอ <strong>ไม่ใช่</strong>ระบบความปลอดภัยจริง ก่อนใช้งานจริงควรป้องกัน <code>/admin/</code> ด้วย Netlify Identity, Vercel Password Protection หรือ Basic-Auth ดูวิธีใน README</div>
+</div>
+
+<div id="app" hidden>
+<header class="top">
+  <div><b>ANDAMAN LAND</b><span>หลังบ้านจัดการเว็บไซต์</span>
+    <span class="statusline" id="ghstatus"><span class="dot dot--off" id="ghdot"></span>ยังไม่เชื่อม GitHub</span>
+    <span class="statusline" id="idstatus"></span>
+  </div>
+  <div class="row-actions">
+    <a class="btn btn--ghost btn--small" href="/en/" target="_blank" rel="noopener" style="color:#fff;border-color:rgba(255,255,255,.4)">ดูเว็บไซต์</a>
+    <button class="btn btn--ghost btn--small" id="download" type="button" style="color:#fff;border-color:rgba(255,255,255,.4)">ดาวน์โหลด JSON</button>
+    <button class="btn btn--brass btn--small" id="publish" type="button" disabled>เผยแพร่ขึ้นเว็บ</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="note" id="modenote" style="margin-bottom:20px">
+    ไปที่แท็บ <strong>Connect</strong> เพื่อเชื่อมหลังบ้านนี้กับ GitHub repo ของคุณ (ทำครั้งเดียว) จากนั้นทุกครั้งที่กด
+    <strong>เผยแพร่ขึ้นเว็บ</strong> ข้อมูลจะอัปเดตขึ้นเว็บจริงทันที — Netlify จะ build ให้อัตโนมัติภายในประมาณ 1 นาที
+    <span id="dirty" class="muted"></span>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" data-tab="properties" aria-selected="true">ประกาศที่ดิน</button>
+    <button role="tab" data-tab="locations" aria-selected="false">ทำเล</button>
+    <button role="tab" data-tab="articles" aria-selected="false">บทความ</button>
+    <button role="tab" data-tab="leads" aria-selected="false">ลูกค้าที่ติดต่อเข้ามา</button>
+    <button role="tab" data-tab="connect" aria-selected="false">เชื่อมต่อ</button>
+    <button role="tab" data-tab="help" aria-selected="false">วิธีใช้</button>
+  </div>
+
+  <!-- PROPERTIES -->
+  <section class="panel" id="panel-properties">
+    <div class="bar">
+      <input type="search" id="q" placeholder="ค้นหาด้วยรหัส ชื่อ หรือทำเล…" aria-label="ค้นหาประกาศ"/>
+      <select id="fstatus" style="max-width:180px" aria-label="กรองตามสถานะ">
+        <option value="">ทุกสถานะ</option>
+        <option value="for-sale">ประกาศขาย</option>
+        <option value="reserved">จองแล้ว</option>
+        <option value="sold">ขายแล้ว</option>
+        <option value="off-market">ปิดประกาศ</option>
+      </select>
+      <button class="btn btn--brass" id="addnew" type="button">+ เพิ่มประกาศใหม่</button>
+      <label style="display:none" for="importfile">นำเข้า</label>
+      <button class="btn btn--ghost" id="importbtn" type="button">นำเข้า JSON</button>
+      <input id="importfile" type="file" accept="application/json" hidden/>
+    </div>
+    <p class="muted" id="count"></p>
+    <table>
+      <thead><tr><th>รหัส</th><th>ชื่อประกาศ (EN)</th><th>ทำเล</th><th>ประเภท</th><th>ราคา</th><th>ขนาด</th><th>สถานะ</th><th>จัดการ</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="panel" id="panel-locations" hidden>
+    <h2>หน้าทำเล</h2>
+    <p class="muted">หน้าทำเล 9 แห่งถูกสร้างไว้ครบทั้ง 3 ภาษาแล้ว ตัวเลขด้านล่างนับจากรายการประกาศปัจจุบันของคุณ</p>
+    <table><thead><tr><th>Slug</th><th>ชื่อทำเล</th><th>จำนวนประกาศ</th><th>เปิดดู</th></tr></thead><tbody id="locrows"></tbody></table>
+    <div class="card" style="margin-top:20px">
+      <h3>แก้ไขข้อความประจำทำเล</h3>
+      <p class="muted">ย่อหน้าแนะนำ ขนาดที่ดินทั่วไป รายชื่อสถานที่ใกล้เคียง และ FAQ ของแต่ละทำเล อยู่ในไฟล์
+      <code>src/content_pages.py</code> → <code>LOCATION_COPY["slug"]["en" | "th" | "zh"]</code>
+      แก้ไฟล์นั้น บันทึก แล้วรัน <code>python3 build.py</code> ถ้าจะเพิ่มทำเลใหม่ ให้เพิ่ม slug ใน
+      <code>LOCATION_PAGES</code> ที่ไฟล์ <code>src/data.py</code> แล้วเพิ่มเนื้อหาให้ครบทั้ง 3 ภาษา</p>
+    </div>
+  </section>
+
+  <!-- ARTICLES -->
+  <section class="panel" id="panel-articles" hidden>
+    <h2>บทความ Buying Guide</h2>
+    <p class="muted">มีบทความ 10 เรื่อง แต่ละเรื่องเผยแพร่ครบทั้งภาษาอังกฤษ ไทย และจีน</p>
+    <table><thead><tr><th>Slug</th><th>ชื่อบทความ (EN)</th><th>อ่าน</th></tr></thead><tbody id="artrows"></tbody></table>
+    <div class="card" style="margin-top:20px">
+      <h3>เพิ่มหรือแก้ไขบทความ</h3>
+      <p class="muted">บทความอยู่ในไฟล์ <code>src/content_articles.py</code> ในลิสต์ <code>ARTICLES</code> คัดลอกบทความเดิมมาวาง
+      เปลี่ยน <code>slug</code> แล้วกรอก <code>title / meta / lead / sections / faq</code> ให้ครบทั้ง <code>en</code>, <code>th</code> และ
+      <code>zh</code> รันคำสั่ง <code>python3 build.py</code> ระบบจะสร้างหน้าบทความ, FAQ schema และอัปเดต sitemap ให้อัตโนมัติ
+      เขียนเรื่องกฎหมายด้วยความระมัดระวัง ห้ามเขียนว่าชาวต่างชาติถือครองที่ดินได้โดยไม่มีข้อจำกัด</p>
+    </div>
+  </section>
+
+  <!-- LEADS -->
+  <section class="panel" id="panel-leads" hidden>
+    <h2>ลูกค้าที่ติดต่อเข้ามา</h2>
+    <div class="note">ข้อมูลจากฟอร์ม <strong>ไม่ได้</strong>เก็บไว้ในเบราว์เซอร์นี้ จะไปอยู่ที่ไหนขึ้นอยู่กับวิธีที่ตั้งฟอร์มไว้:</div>
+    <div class="card" style="margin-top:16px">
+      <h3>Netlify Forms (ค่าเริ่มต้น)</h3>
+      <p class="muted">Netlify → เว็บของคุณ → เมนู <strong>Forms</strong> → ดูที่ <code>property-enquiry</code> และ <code>contact</code>
+      ควรตั้งแจ้งเตือนทางอีเมลไว้ที่นั่นด้วย เพื่อให้ลูกค้าใหม่เด้งเข้าอีเมลทันที แต่ละรายการจะมีรหัสประกาศ
+      ชื่อ สัญชาติ อีเมล WhatsApp ช่องทางที่สะดวก และข้อความติดต่อมาครบ</p>
+      <h3 style="margin-top:18px">ถ้าใช้บริการฟอร์มอื่น</h3>
+      <p class="muted">ถ้าตั้งค่า <code>SITE["form_endpoint"]</code> ใน <code>src/data.py</code> ไว้ (เช่น Formspree, Getform หรือ API ของคุณเอง)
+      รายชื่อลูกค้าจะไปอยู่ที่แดชบอร์ดของบริการนั้นแทน</p>
+    </div>
+    <div class="card">
+      <h3>รายชื่อรหัสประกาศ</h3>
+      <p class="muted">ทุกครั้งที่มีคนติดต่อเข้ามาจะมีรหัสประกาศแนบมาด้วย เพื่อให้รู้ว่าสนใจแปลงไหน</p>
+      <table><thead><tr><th>รหัส</th><th>ชื่อประกาศ (EN)</th><th>สถานะ</th></tr></thead><tbody id="leadrows"></tbody></table>
+    </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section class="panel" id="panel-connect" hidden>
+    <h2>เชื่อมกับเว็บไซต์ของคุณ</h2>
+    <div class="card" id="connectcard">
+      <p class="muted">เชื่อมหลังบ้านนี้กับ GitHub repository ของคุณเพียงครั้งเดียว จากนั้นปุ่ม <strong>บันทึก</strong> และ
+      <strong>เผยแพร่ขึ้นเว็บ</strong> จะเขียนตรงเข้าเว็บจริงทันที — ไม่ต้องดาวน์โหลด ไม่ต้อง copy-paste ไม่ต้องเปิด
+      Terminal Netlify จะ build ให้อัตโนมัติทุกครั้งที่หลังบ้านนี้ commit การเปลี่ยนแปลง</p>
+      <div class="grid3" style="margin-top:14px">
+        <div><label for="gh_owner">ชื่อผู้ใช้ / องค์กรบน GitHub</label><input id="gh_owner" placeholder="เช่น benzsupawat"/></div>
+        <div><label for="gh_repo">ชื่อ Repository</label><input id="gh_repo" placeholder="เช่น andaman-land"/></div>
+        <div><label for="gh_branch">Branch</label><input id="gh_branch" placeholder="main" value="main"/></div>
+      </div>
+      <div style="margin-top:12px"><label for="gh_token">Personal access token</label>
+        <input id="gh_token" type="password" placeholder="github_pat_…"/></div>
+      <p class="row-actions" style="margin-top:14px">
+        <button class="btn btn--brass" id="gh_connect" type="button">เชื่อมต่อ &amp; ทดสอบ</button>
+        <button class="btn btn--danger" id="gh_disconnect" type="button">ยกเลิกการเชื่อม</button>
+      </p>
+      <p class="muted" id="gh_msg"></p>
+    </div>
+
+    <div class="card">
+      <h3>วิธีขอ token (ทำครั้งเดียว ใช้เวลา 2 นาที)</h3>
+      <ol>
+        <li>เข้า <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> (ล็อกอิน GitHub ก่อน)</li>
+        <li><strong>Repository access</strong> → เลือก <em>Only select repositories</em> → เลือกเฉพาะ repo ของ Andaman Land</li>
+        <li><strong>Permissions</strong> → <em>Repository permissions</em> → ตั้ง <strong>Contents</strong> เป็น <strong>Read and write</strong> ที่เหลือปล่อย No access</li>
+        <li>ตั้งวันหมดอายุ (90 วันก็พอ — หมดแล้วค่อยสร้างใหม่) แล้วกด <strong>Generate token</strong></li>
+        <li>คัดลอก token (ขึ้นต้นด้วย <code>github_pat_…</code>) มาแปะด้านบน แล้วกด <strong>เชื่อมต่อ &amp; ทดสอบ</strong></li>
+      </ol>
+      <div class="note">Token จะถูกเก็บไว้ใน <strong>เบราว์เซอร์เครื่องนี้เท่านั้น</strong> — ส่งตรงไปที่ GitHub API เท่านั้น
+      ไม่แชร์ข้ามอุปกรณ์ ถ้าใช้หลังบ้านนี้จากเครื่องอื่นหรือมือถือ ให้เชื่อมใหม่ด้วย token เดิม (หรือสร้างใหม่ก็ได้)
+      ถ้า token หลุด ให้ไป revoke ที่หน้า GitHub settings เดิมทันที</div>
+    </div>
+
+    <div class="card">
+      <h3>ยังไม่พร้อมเชื่อม GitHub?</h3>
+      <p class="muted">ทำงานแบบออฟไลน์ได้เหมือนเดิม: แก้ข้อมูลประกาศด้านล่าง แล้วกด <strong>ดาวน์โหลด JSON</strong>
+      ด้านบน วางทับ <code>data/properties.json</code> รัน <code>python3 build.py</code> แล้วอัปโหลด
+      <code>dist/</code> เอง การเชื่อม GitHub แค่ช่วยตัดขั้นตอนพวกนี้ออกไป</p>
+    </div>
+  </section>
+
+  <!-- HELP -->
+  <section class="panel" id="panel-help" hidden>
+    <h2>วิธีใช้งาน</h2>
+    <div class="card">
+      <h3>เมื่อเชื่อม GitHub แล้ว (แนะนำ — ตั้งครั้งเดียวในแท็บ Connect)</h3>
+      <ol>
+        <li>เพิ่มหรือแก้ไขประกาศ กด <strong>Save property</strong></li>
+        <li>กด <strong>เผยแพร่ขึ้นเว็บ</strong> มุมขวาบน</li>
+        <li>Netlify จะ build ให้อัตโนมัติ รีเฟรชหน้าเว็บจริงในอีก ~1 นาทีเพื่อดูผล</li>
+      </ol>
+      <h3 style="margin-top:18px">ยังไม่ได้เชื่อม</h3>
+      <ol>
+        <li>เพิ่มหรือแก้ไขประกาศ กด <strong>Save property</strong></li>
+        <li>กด <strong>ดาวน์โหลด JSON</strong> มุมขวาบน</li>
+        <li>นำไฟล์ที่ดาวน์โหลดมาวางทับ <code>data/properties.json</code> ในโปรเจกต์</li>
+        <li>รัน <code>python3 build.py</code> ในโฟลเดอร์โปรเจกต์</li>
+        <li>อัปโหลดโฟลเดอร์ <code>dist/</code> ขึ้น Netlify (หรือ push ขึ้น Git แล้วให้ build เอง)</li>
+      </ol>
+      <p class="muted">ไม่มีฐานข้อมูล ไม่มีเซิร์ฟเวอร์ ไม่มีค่าใช้จ่ายรายเดือน ทุกหน้าเป็น HTML จริง Google จึงอ่านชื่อประกาศ
+      ราคา ทำเล และคำบรรยายได้โดยไม่ต้องรัน JavaScript</p>
+    </div>
+    <div class="card">
+      <h3>รูปภาพ</h3>
+      <p class="muted">ตั้งชื่อไฟล์ให้สื่อความหมายและเป็นมิตรกับ SEO เช่น
+      <code>land-for-sale-thalang-phuket-001.jpg</code> — ห้ามใช้ <code>IMG_1234.jpg</code> เมื่อเชื่อม GitHub แล้ว
+      ใช้ปุ่ม <strong>Upload image file</strong> ในหน้าแก้ไขประกาศเพื่อส่งรูปตรงเข้า
+      <code>assets/img/</code> พร้อมเพิ่มลงแกลเลอรีให้ในขั้นตอนเดียว ถ้ายังไม่เชื่อม ให้วางไฟล์ใน
+      <code>assets/img/</code> เองแล้วใส่ path ในรายการแกลเลอรี
+      ถ้าประกาศไหนยังไม่มีรูป เว็บจะใช้ภาพประกอบที่สร้างอัตโนมัติแทนไปก่อน ไม่ทำให้หน้าเว็บพัง</p>
+      <h3 style="margin-top:18px">กฎ: ห้ามสร้างข้อมูลปลอม</h3>
+      <p class="muted">เว้นราคา ขนาด พิกัด และสาธารณูปโภคว่างไว้จนกว่าจะมีตัวเลขจริง ช่องที่ว่างจะแสดงเป็น
+      "ราคาติดต่อสอบถาม" แทนตัวเลขที่แต่งขึ้น เมื่อประกาศมีข้อมูลจริงครบแล้วให้ลบสถานะ <code>sample</code> ออก</p>
+    </div>
+  </section>
+</div>
+</div>
+
+<dialog id="editor">
+  <form method="dialog" id="editform">
+    <div class="dlg-head"><h2 id="dlgtitle" style="margin:0">แก้ไขประกาศ</h2>
+      <button class="btn btn--ghost btn--small" value="cancel" type="submit">ปิด</button></div>
+    <div class="dlg-body">
+      <fieldset><legend>ข้อมูลพื้นฐาน</legend>
+        <div class="grid3">
+          <div><label for="f_id">รหัสประกาศ</label><input id="f_id" required/></div>
+          <div><label for="f_slug">URL slug</label><input id="f_slug" required pattern="[a-z0-9\-]+"/></div>
+          <div><label for="f_status">สถานะ</label><select id="f_status">
+            <option value="for-sale">ประกาศขาย</option><option value="reserved">จองแล้ว</option>
+            <option value="sold">ขายแล้ว</option><option value="off-market">ปิดประกาศ</option></select></div>
+          <div><label for="f_type">ประเภทที่ดิน</label><select id="f_type">
+            <option value="land">ที่ดินทั่วไป</option><option value="development-land">ที่ดินเพื่อพัฒนา</option>
+            <option value="beachfront-land">ที่ดินติดชายหาด</option><option value="investment-land">ที่ดินเพื่อการลงทุน</option>
+            <option value="commercial-land">ที่ดินเชิงพาณิชย์</option></select></div>
+          <div><label for="f_location">ทำเล</label><select id="f_location"></select></div>
+          <div><label for="f_featured">แสดงในหน้าแรก</label><select id="f_featured">
+            <option value="no">ไม่แสดง</option><option value="yes">แสดง</option></select></div>
+          <div><label for="f_sample">ประกาศตัวอย่าง</label><select id="f_sample">
+            <option value="no">ไม่ใช่ — ประกาศจริง</option><option value="yes">ใช่ — แสดงป้าย SAMPLE</option></select></div>
+          <div><label for="f_district">อำเภอ/เขต</label><input id="f_district"/></div>
+          <div><label for="f_province">จังหวัด</label><input id="f_province"/></div>
+        </div>
+        <p class="muted" style="margin:10px 0 0">URL จะเป็น <code id="urlpreview">/en/property/…/</code></p>
+      </fieldset>
+
+      <fieldset><legend>ราคาและขนาด — เว้นว่างถ้ายังไม่ทราบ</legend>
+        <div class="grid3">
+          <div><label for="f_price">ราคา</label><input id="f_price" type="number" min="0" step="1" placeholder="เว้นว่าง = ติดต่อสอบถาม"/></div>
+          <div><label for="f_currency">สกุลเงิน</label><input id="f_currency" placeholder="THB"/></div>
+          <div><label for="f_rai">ไร่</label><input id="f_rai" type="number" min="0" step="0.01"/></div>
+          <div><label for="f_ngan">งาน</label><input id="f_ngan" type="number" min="0" step="0.01"/></div>
+          <div><label for="f_wah">ตารางวา</label><input id="f_wah" type="number" min="0" step="0.01"/></div>
+          <div><label for="f_sqm">ตารางเมตร</label><input id="f_sqm" type="number" min="0" step="0.01"/></div>
+        </div>
+        <p class="muted" style="margin:10px 0 0"><button class="btn btn--ghost btn--small" type="button" id="calcsize">คำนวณตารางวา/ตร.ม. จากไร่-งาน</button> (1 ไร่ = 4 งาน = 400 ตารางวา = 1,600 ตร.ม.)</p>
+      </fieldset>
+
+      <fieldset><legend>ข้อมูลที่ดิน</legend>
+        <div class="grid2">
+          <div><label for="f_deed">ประเภทโฉนด</label><input id="f_deed"/></div>
+          <div><label for="f_road">ทางเข้า-ถนน</label><input id="f_road"/></div>
+          <div><label for="f_elec">ไฟฟ้า</label><input id="f_elec"/></div>
+          <div><label for="f_water">น้ำประปา</label><input id="f_water"/></div>
+          <div><label for="f_zoning">ผังสีที่ดิน</label><input id="f_zoning"/></div>
+          <div><label for="f_dair">ระยะห่างสนามบิน</label><input id="f_dair"/></div>
+          <div><label for="f_dbeach">ระยะห่างชายหาด</label><input id="f_dbeach"/></div>
+          <div><label for="f_dattr">ระยะห่างแหล่งท่องเที่ยว</label><input id="f_dattr"/></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>แผนที่และสื่อ</legend>
+        <div class="grid3">
+          <div><label for="f_lat">ละติจูด</label><input id="f_lat" type="number" step="0.000001" placeholder="เว้นว่าง = ไม่แสดงแผนที่"/></div>
+          <div><label for="f_lng">ลองจิจูด</label><input id="f_lng" type="number" step="0.000001"/></div>
+          <div><label for="f_video">ลิงก์วิดีโอ (YouTube)</label><input id="f_video" type="url" placeholder="https://www.youtube.com/watch?v=…"/></div>
+        </div>
+        <div style="margin-top:12px"><label for="f_map">ลิงก์ Google Maps (ไม่บังคับ — ถ้าเว้นว่างจะสร้างจากพิกัดให้อัตโนมัติ)</label><input id="f_map" type="url"/></div>
+        <p class="muted" style="margin-top:6px">เคล็ดลับ: บน Google Maps คลิกขวาที่หมุด แล้วคลิกตัวเลขชุดแรกที่ขึ้นมา — จะคัดลอก "lat, lng" ให้นำมาวางด้านบนได้เลย</p>
+        <div style="margin-top:14px">
+          <label>คลังรูปภาพ</label>
+          <div id="imglist" class="list-edit"></div>
+          <p class="row-actions">
+            <button class="btn btn--ghost btn--small" type="button" id="addimg">+ เพิ่มรูปด้วย path</button>
+            <button class="btn btn--brass btn--small" type="button" id="uploadimg">⬆ อัปโหลดไฟล์รูป</button>
+            <input id="imgfile" type="file" accept="image/*" multiple hidden/>
+          </p>
+          <p class="muted" id="uploadhint">ใส่ path แล้วตามด้วย ALT text เช่น <code>/assets/img/land-for-sale-thalang-phuket-001.jpg</code> · “Land for sale in Thalang Phuket” ปุ่ม <strong>อัปโหลดไฟล์รูป</strong> จะส่งรูปตรงเข้า <code>assets/img/</code> ใน repo ของคุณ (ต้องเชื่อม GitHub ก่อน — ดูแท็บ Connect) และเพิ่มแถวให้อัตโนมัติ</p>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>ช่องทางติดต่อของประกาศนี้</legend>
+        <div class="grid3">
+          <div><label for="f_cname">ชื่อผู้ติดต่อ</label><input id="f_cname"/></div>
+          <div><label for="f_cphone">เบอร์โทร</label><input id="f_cphone"/></div>
+          <div><label for="f_cemail">อีเมล</label><input id="f_cemail"/></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>เนื้อหาแยกตามภาษา</legend>
+        <div class="langtabs" role="tablist">
+          <button type="button" role="tab" data-l="en" aria-selected="true">English</button>
+          <button type="button" role="tab" data-l="th" aria-selected="false">ไทย</button>
+          <button type="button" role="tab" data-l="zh" aria-selected="false">中文</button>
+        </div>
+        <div><label for="f_title">ชื่อประกาศ</label><input id="f_title"/></div>
+        <div style="margin-top:12px"><label for="f_desc">คำบรรยาย</label><textarea id="f_desc"></textarea></div>
+        <div style="margin-top:12px"><label for="f_pot">ศักยภาพในการพัฒนา</label><textarea id="f_pot" style="min-height:70px"></textarea></div>
+        <div style="margin-top:12px"><label>จุดเด่น</label><div id="featlist" class="list-edit"></div>
+          <button class="btn btn--ghost btn--small" type="button" id="addfeat">+ เพิ่มจุดเด่น</button></div>
+        <div style="margin-top:14px"><label>สถานที่ใกล้เคียง</label><div id="nearlist" class="list-edit"></div>
+          <button class="btn btn--ghost btn--small" type="button" id="addnear">+ เพิ่มสถานที่ใกล้เคียง</button></div>
+        <p class="muted" style="margin-top:12px">กรอกให้ครบทั้ง 3 ภาษา ช่องไหนเว้นว่างจะใช้ข้อความภาษาอังกฤษแทน</p>
+      </fieldset>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn btn--ghost" value="cancel" type="submit">ยกเลิก</button>
+      <button class="btn btn--brass" type="button" id="save">บันทึกประกาศ</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+/* ---- Change this passcode. It only hides the UI; use real auth in production. ---- */
+var PASSCODE = "andaman";
+
+var LOCATIONS = [["phuket","Phuket"],["thalang","Thalang"],["cherng-talay","Cherng Talay"],
+  ["bang-tao","Bang Tao"],["kamala","Kamala"],["rawai","Rawai"],["nai-harn","Nai Harn"],
+  ["kata","Kata"],["karon","Karon"],["phuket-town","Phuket Town"],["other","Other areas"]];
+var PAGE_LOCATIONS = ["phuket","thalang","cherng-talay","bang-tao","kamala","rawai","nai-harn","kata","karon"];
+var ARTICLES = [
+ ["can-foreigners-buy-land-in-thailand","Can foreigners buy land in Thailand?"],
+ ["buying-property-in-phuket-guide-for-foreign-buyers","Buying property in Phuket: a guide for foreign buyers"],
+ ["freehold-vs-leasehold-in-thailand","Freehold vs leasehold in Thailand"],
+ ["how-to-buy-property-in-phuket","How to buy property in Phuket"],
+ ["property-due-diligence-in-thailand","Property due diligence in Thailand"],
+ ["costs-of-buying-property-in-thailand","Costs of buying property in Thailand"],
+ ["investing-in-phuket-property","Investing in Phuket property"],
+ ["best-areas-to-invest-in-phuket","Best areas to invest in Phuket"],
+ ["land-development-opportunities-in-phuket","Land development opportunities in Phuket"],
+ ["things-to-check-before-buying-land-in-phuket","Things to check before buying land in Phuket"]];
+var STORE = "andaman-admin-properties";
+var db = {_README:"", properties:[]}, current = null, curLang = "en", dirty = false;
+
+function $(id){ return document.getElementById(id); }
+function el(tag,attrs,kids){ var n=document.createElement(tag); attrs=attrs||{};
+  for(var k in attrs){ if(k==="text") n.textContent=attrs[k]; else n.setAttribute(k,attrs[k]); }
+  (kids||[]).forEach(function(c){ n.appendChild(c); }); return n; }
+function toast(msg){ var t=$("toast"); t.textContent=msg; t.classList.add("on");
+  setTimeout(function(){ t.classList.remove("on"); }, 2200); }
+function today(){ return new Date().toISOString().slice(0,10); }
+function num(v){ if(v===""||v===null||v===undefined) return null; var n=Number(v); return isNaN(n)?null:n; }
+function slugify(s){ return (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
+function locName(s){ for(var i=0;i<LOCATIONS.length;i++){ if(LOCATIONS[i][0]===s) return LOCATIONS[i][1]; } return s||""; }
+function markDirty(){ dirty=true; var d=$("dirty"); if(d) d.textContent = ghConnected() ? "· unpublished changes — click Publish to website" : "· unsaved changes are stored in this browser"; }
+
+/* ---------- login ---------- */
+function unlock(){
+  if($("pw").value !== PASSCODE){ toast("รหัสผ่านไม่ถูกต้อง"); return; }
+  try{ sessionStorage.setItem("andaman-admin","1"); }catch(e){}
+  $("login").hidden = true; $("app").hidden = false; boot();
+}
+$("pwgo").addEventListener("click", unlock);
+$("pw").addEventListener("keydown", function(e){ if(e.key==="Enter") unlock(); });
+try{ if(sessionStorage.getItem("andaman-admin")==="1"){ $("login").hidden=true; $("app").hidden=false; } }catch(e){}
+
+/* ---------- GitHub connection ---------- */
+var GH_STORE = "andaman-admin-github";
+var gh = {owner:"", repo:"", branch:"main", token:""};
+var ghSha = {}; // path -> sha, so updates don't clobber concurrent edits
+function ghLoadSettings(){
+  try{ var s = localStorage.getItem(GH_STORE); if(s) gh = JSON.parse(s); }catch(e){}
+}
+function ghSaveSettings(){ try{ localStorage.setItem(GH_STORE, JSON.stringify(gh)); }catch(e){} }
+function ghConnected(){ return !!(gh.owner && gh.repo && gh.token); }
+function ghApi(path, opts){
+  opts = opts || {};
+  var headers = Object.assign({
+    "Authorization": "Bearer " + gh.token,
+    "Accept": "application/vnd.github+json"
+  }, opts.headers || {});
+  return fetch("https://api.github.com/repos/" + gh.owner + "/" + gh.repo + path,
+    Object.assign({}, opts, {headers: headers}))
+    .then(function(r){
+      if(!r.ok) return r.json().catch(function(){return {};}).then(function(j){
+        throw new Error((j && j.message) || ("GitHub API error " + r.status)); });
+      return r.status === 204 ? null : r.json();
+    });
+}
+function b64EncodeUtf8(str){
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function b64DecodeUtf8(b64){
+  return decodeURIComponent(escape(atob(b64.replace(/\n/g,""))));
+}
+function ghGetFile(path){
+  return ghApi("/contents/" + path + "?ref=" + encodeURIComponent(gh.branch))
+    .then(function(j){ ghSha[path] = j.sha; return b64DecodeUtf8(j.content); });
+}
+function ghPutFile(path, contentStr, message, isBinaryB64){
+  var body = { message: message, branch: gh.branch,
+    content: isBinaryB64 ? contentStr : b64EncodeUtf8(contentStr) };
+  if(ghSha[path]) body.sha = ghSha[path];
+  return ghApi("/contents/" + path, {method:"PUT", body: JSON.stringify(body)})
+    .then(function(j){ ghSha[path] = j.content.sha; return j; });
+}
+function ghUpdateStatusUI(){
+  var dot = $("ghdot"), status = $("ghstatus"), pub = $("publish"), note = $("modenote");
+  if(ghConnected()){
+    dot.className = "dot dot--on";
+    status.lastChild.textContent = "เชื่อมต่อแล้ว · " + gh.owner + "/" + gh.repo + " (" + gh.branch + ")";
+    pub.disabled = false;
+    note.innerHTML = 'Connected to GitHub. <strong>Save property</strong> keeps changes in this dashboard; <strong>Publish to website</strong> commits them to your repo and Netlify rebuilds automatically. <span id="dirty" class="muted"></span>';
+  } else {
+    dot.className = "dot dot--off";
+    status.lastChild.textContent = "ยังไม่เชื่อม GitHub";
+    pub.disabled = true;
+    note.innerHTML = 'Go to the <strong>Connect</strong> tab and link this dashboard to your GitHub repo once. After that, every <strong>Publish to website</strong> click updates the live site directly — Netlify rebuilds automatically in about a minute. <span id="dirty" class="muted"></span>';
+  }
+}
+$("gh_connect").addEventListener("click", function(){
+  gh.owner = $("gh_owner").value.trim();
+  gh.repo = $("gh_repo").value.trim().replace(/\.git$/,"");
+  gh.branch = $("gh_branch").value.trim() || "main";
+  gh.token = $("gh_token").value.trim();
+  if(!gh.owner || !gh.repo || !gh.token){ $("gh_msg").textContent = "กรอกชื่อผู้ใช้ ชื่อ repo และ token ให้ครบ"; return; }
+  $("gh_msg").textContent = "กำลังทดสอบการเชื่อมต่อ…";
+  ghApi("").then(function(){
+    ghSaveSettings(); ghUpdateStatusUI();
+    $("gh_msg").textContent = "เชื่อมต่อสำเร็จ กำลังโหลดข้อมูลจาก GitHub…";
+    load();
+  }).catch(function(e){
+    $("gh_msg").textContent = "เชื่อมต่อไม่สำเร็จ: " + e.message + " ตรวจสอบชื่อผู้ใช้ ชื่อ repo, branch และสิทธิ์ของ token";
+  });
+});
+$("gh_disconnect").addEventListener("click", function(){
+  gh = {owner:"", repo:"", branch:"main", token:""}; ghSaveSettings(); ghUpdateStatusUI();
+  $("gh_owner").value=""; $("gh_repo").value=""; $("gh_token").value=""; $("gh_branch").value="main";
+  $("gh_msg").textContent = "ยกเลิกการเชื่อมต่อแล้ว ยังดาวน์โหลดเป็น JSON ได้ตามปกติ";
+  toast("ยกเลิกการเชื่อมกับ GitHub แล้ว");
+});
+
+/* ---------- data ---------- */
+function load(){
+  if(ghConnected()){
+    ghGetFile("data/properties.json").then(function(text){
+      db = JSON.parse(text); dirty=false; $("dirty") && ($("dirty").textContent=""); render();
+    }).catch(function(e){
+      toast("โหลด properties.json จาก GitHub ไม่สำเร็จ: " + e.message);
+      render();
+    });
+    return;
+  }
+  var local=null;
+  try{ local = localStorage.getItem(STORE); }catch(e){}
+  if(local){ try{ db = JSON.parse(local); dirty=true; markDirty(); render(); return; }catch(e){} }
+  fetch("properties.json").then(function(r){ return r.json(); })
+    .then(function(j){ db = j; render(); })
+    .catch(function(){
+      fetch("/admin/properties.json").then(function(r){return r.json();})
+        .then(function(j){ db=j; render(); })
+        .catch(function(){ toast("โหลด properties.json ไม่สำเร็จ — เปิดผ่านเซิร์ฟเวอร์ในเครื่อง (ดู README)"); render(); });
+    });
+}
+function persist(){ try{ localStorage.setItem(STORE, JSON.stringify(db)); }catch(e){} markDirty(); }
+
+/* ---------- publish to GitHub ---------- */
+$("publish").addEventListener("click", function(){
+  if(!ghConnected()){ toast("เชื่อม GitHub ก่อน (แท็บ Connect)"); return; }
+  $("publish").disabled = true;
+  var orig = $("publish").textContent;
+  $("publish").innerHTML = '<span class="spin"></span>Publishing…';
+  ghPutFile("data/properties.json", JSON.stringify(db, null, 2), "Update properties.json via admin dashboard")
+    .then(function(){
+      dirty = false; $("dirty").textContent = "";
+      try{ localStorage.removeItem(STORE); }catch(e){}
+      toast("เผยแพร่สำเร็จ! Netlify กำลัง build เว็บใหม่ — เช็กผลในอีกประมาณ 1 นาที");
+    })
+    .catch(function(e){ toast("เผยแพร่ไม่สำเร็จ: " + e.message); })
+    .finally(function(){ $("publish").disabled=false; $("publish").textContent=orig; });
+});
+
+/* ---------- tabs ---------- */
+Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function(b){
+  b.addEventListener("click", function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function(o){ o.setAttribute("aria-selected", o===b ? "true":"false"); });
+    Array.prototype.forEach.call(document.querySelectorAll('.panel'), function(p){ p.hidden = true; });
+    $("panel-"+b.dataset.tab).hidden = false;
+  });
+});
+
+/* ---------- render ---------- */
+function statusTag(s){ var labels={"for-sale":"ประกาศขาย","reserved":"จองแล้ว","sold":"ขายแล้ว","off-market":"ปิดประกาศ"};
+  return el("span",{"class":"tag tag--"+s, text: labels[s]||s}); }
+
+function render(){
+  var q = ($("q").value||"").toLowerCase(), fs = $("fstatus").value;
+  var tb = $("rows"); tb.innerHTML="";
+  var list = (db.properties||[]).filter(function(p){
+    if(fs && p.status!==fs) return false;
+    if(!q) return true;
+    var hay = [p.id,p.slug,p.location,p.property_type,(p.en&&p.en.title)||""].join(" ").toLowerCase();
+    return hay.indexOf(q)>-1;
+  });
+  $("count").textContent = "แสดง " + list.length + " จากทั้งหมด " + (db.properties||[]).length + " ประกาศ";
+  list.forEach(function(p){
+    var tr = el("tr");
+    tr.appendChild(el("td",{text:p.id||""}));
+    var tdt = el("td"); tdt.appendChild(el("strong",{text:(p.en&&p.en.title)||"(no title)"}));
+    if(p.sample) tdt.appendChild(el("span",{"class":"tag tag--sample",text:"ตัวอย่าง",style:"margin-left:6px"}));
+    if(p.featured) tdt.appendChild(el("span",{"class":"tag",text:"แนะนำ",style:"margin-left:6px"}));
+    tdt.appendChild(el("div",{"class":"muted",text:"/en/property/"+(p.slug||"")+"/"}));
+    tr.appendChild(tdt);
+    tr.appendChild(el("td",{text:locName(p.location)}));
+    tr.appendChild(el("td",{text:(p.property_type||"").replace(/-/g," ")}));
+    tr.appendChild(el("td",{text: p.price ? (p.currency||"THB")+" "+Number(p.price).toLocaleString("en-US") : "On application"}));
+    tr.appendChild(el("td",{text: p.rai ? p.rai+" rai" : (p.square_meter ? p.square_meter+" m²" : "—")}));
+    var tds = el("td"); tds.appendChild(statusTag(p.status||"for-sale")); tr.appendChild(tds);
+    var tda = el("td"); var box = el("div",{"class":"row-actions"});
+    var eb = el("button",{"class":"btn btn--ghost btn--small",type:"button",text:"แก้ไข"});
+    eb.addEventListener("click", function(){ openEditor(p); });
+    var sel = el("select",{"aria-label":"Change status", style:"width:auto;padding:5px 8px;font-size:13px"});
+    [["for-sale","For Sale"],["reserved","Reserved"],["sold","Sold"],["off-market","Off Market"]].forEach(function(o){
+      var op = el("option",{value:o[0],text:o[1]}); if((p.status||"for-sale")===o[0]) op.selected=true; sel.appendChild(op); });
+    sel.addEventListener("change", function(){ p.status=sel.value; p.updated_at=today(); persist(); render(); toast("อัปเดตสถานะแล้ว"); });
+    var db_ = el("button",{"class":"btn btn--ghost btn--small",type:"button",text:"ทำสำเนา"});
+    db_.addEventListener("click", function(){ var c=JSON.parse(JSON.stringify(p));
+      c.id = nextId(); c.slug = (p.slug||"listing")+"-copy"; c.featured=false; c.created_at=today(); c.updated_at=today();
+      db.properties.push(c); persist(); render(); toast("ทำสำเนาแล้ว"); });
+    var xb = el("button",{"class":"btn btn--danger btn--small",type:"button",text:"ลบ"});
+    xb.addEventListener("click", function(){
+      if(!confirm("ลบ "+p.id+" ใช่หรือไม่? ปกติแล้วประกาศที่ขายแล้วควรเก็บไว้ (เปลี่ยนสถานะเป็น Sold แทน) เพื่อให้หน้ายังอยู่เพื่อ SEO")) return;
+      db.properties = db.properties.filter(function(x){ return x!==p; }); persist(); render(); toast("ลบแล้ว"); });
+    [eb,sel,db_,xb].forEach(function(n){ box.appendChild(n); });
+    tda.appendChild(box); tr.appendChild(tda);
+    tb.appendChild(tr);
+  });
+  renderLocations(); renderArticles(); renderLeads();
+}
+function renderLocations(){
+  var tb=$("locrows"); tb.innerHTML="";
+  PAGE_LOCATIONS.forEach(function(s){
+    var n=(db.properties||[]).filter(function(p){ return p.location===s; }).length;
+    var tr=el("tr");
+    tr.appendChild(el("td",{text:s}));
+    tr.appendChild(el("td",{text:locName(s)}));
+    tr.appendChild(el("td",{text:String(n)}));
+    var td=el("td"); var a=el("a",{href:"/en/locations/"+s+"/",target:"_blank",rel:"noopener",text:"เปิดดู"}); td.appendChild(a); tr.appendChild(td);
+    tb.appendChild(tr);
+  });
+}
+function renderArticles(){
+  var tb=$("artrows"); tb.innerHTML="";
+  ARTICLES.forEach(function(a){
+    var tr=el("tr"); tr.appendChild(el("td",{text:a[0]})); tr.appendChild(el("td",{text:a[1]}));
+    var td=el("td"); td.appendChild(el("a",{href:"/en/buying-guide/"+a[0]+"/",target:"_blank",rel:"noopener",text:"เปิดดู"})); tr.appendChild(td);
+    tb.appendChild(tr);
+  });
+}
+function renderLeads(){
+  var tb=$("leadrows"); tb.innerHTML="";
+  (db.properties||[]).forEach(function(p){
+    var tr=el("tr"); tr.appendChild(el("td",{text:p.id||""}));
+    tr.appendChild(el("td",{text:(p.en&&p.en.title)||""}));
+    var td=el("td"); td.appendChild(statusTag(p.status||"for-sale")); tr.appendChild(td);
+    tb.appendChild(tr);
+  });
+}
+$("q").addEventListener("input", render);
+$("fstatus").addEventListener("change", render);
+
+/* ---------- editor ---------- */
+function nextId(){
+  var max=0; (db.properties||[]).forEach(function(p){
+    var m=/(\d+)$/.exec(p.id||""); if(m) max=Math.max(max, parseInt(m[1],10)); });
+  return "AL-"+String(max+1).padStart(3,"0");
+}
+function blank(){
+  var n = nextId();
+  function pack(){ return {title:"",description:"",features:[],nearby:[],potential:""}; }
+  return {id:n, slug:"", sample:false, status:"for-sale", featured:false, price:null, currency:"THB",
+    location:"thalang", district:"", province:"Phuket", rai:null, ngan:null, square_wah:null, square_meter:null,
+    property_type:"land", title_deed:"", road_access:"", electricity:"", water:"", zoning:"",
+    latitude:null, longitude:null, map_url:"", video_url:"",
+    distance_airport:"", distance_beach:"", distance_attractions:"", images:[],
+    created_at:today(), updated_at:today(),
+    contact_name:"Benz Supawat", contact_phone:"[ADD PHONE]", contact_email:"[ADD EMAIL]",
+    en:pack(), th:pack(), zh:pack()};
+}
+function listRow(container, a, b, phA, phB){
+  var row = el("div");
+  var i1 = el("input",{value:a||"",placeholder:phA||""});
+  row.appendChild(i1);
+  var i2 = null;
+  if(phB!==undefined){ i2 = el("input",{value:b||"",placeholder:phB}); row.appendChild(i2); }
+  var x = el("button",{"class":"btn btn--danger btn--small",type:"button",text:"×"});
+  x.addEventListener("click", function(){ container.removeChild(row); });
+  row.appendChild(x);
+  container.appendChild(row);
+  return row;
+}
+function readList(container, pair){
+  var out=[];
+  Array.prototype.forEach.call(container.children, function(row){
+    var ins = row.querySelectorAll("input");
+    if(pair){ if(ins[0].value.trim()) out.push({src:ins[0].value.trim(), alt:(ins[1]&&ins[1].value.trim())||""}); }
+    else { if(ins[0].value.trim()) out.push(ins[0].value.trim()); }
+  });
+  return out;
+}
+function fillLocationSelect(){
+  var s=$("f_location"); s.innerHTML="";
+  LOCATIONS.forEach(function(l){ s.appendChild(el("option",{value:l[0],text:l[1]})); });
+}
+function openEditor(p){
+  current = p ? p : blank();
+  var isNew = !p;
+  $("dlgtitle").textContent = isNew ? "เพิ่มประกาศใหม่" : ("แก้ไข " + (current.id||""));
+  fillLocationSelect();
+  $("f_id").value=current.id||""; $("f_slug").value=current.slug||"";
+  $("f_status").value=current.status||"for-sale"; $("f_type").value=current.property_type||"land";
+  $("f_location").value=current.location||"thalang";
+  $("f_featured").value=current.featured?"yes":"no"; $("f_sample").value=current.sample?"yes":"no";
+  $("f_district").value=current.district||""; $("f_province").value=current.province||"Phuket";
+  $("f_price").value=current.price==null?"":current.price; $("f_currency").value=current.currency||"THB";
+  $("f_rai").value=current.rai==null?"":current.rai; $("f_ngan").value=current.ngan==null?"":current.ngan;
+  $("f_wah").value=current.square_wah==null?"":current.square_wah; $("f_sqm").value=current.square_meter==null?"":current.square_meter;
+  $("f_deed").value=current.title_deed||""; $("f_road").value=current.road_access||"";
+  $("f_elec").value=current.electricity||""; $("f_water").value=current.water||""; $("f_zoning").value=current.zoning||"";
+  $("f_dair").value=current.distance_airport||""; $("f_dbeach").value=current.distance_beach||"";
+  $("f_dattr").value=current.distance_attractions||"";
+  $("f_lat").value=current.latitude==null?"":current.latitude; $("f_lng").value=current.longitude==null?"":current.longitude;
+  $("f_video").value=current.video_url||""; $("f_map").value=current.map_url||"";
+  $("f_cname").value=current.contact_name||""; $("f_cphone").value=current.contact_phone||""; $("f_cemail").value=current.contact_email||"";
+  $("imglist").innerHTML="";
+  (current.images||[]).forEach(function(im){
+    if(typeof im === "string") listRow($("imglist"), im, "", "/assets/img/…", "ALT text (คำอธิบายรูป)");
+    else listRow($("imglist"), im.src, im.alt, "/assets/img/…", "ALT text (คำอธิบายรูป)");
+  });
+  curLang="en"; syncLangTabs(); loadLang();
+  updateUrlPreview();
+  $("editor").showModal();
+}
+function syncLangTabs(){
+  Array.prototype.forEach.call(document.querySelectorAll(".langtabs button"), function(b){
+    b.setAttribute("aria-selected", b.dataset.l===curLang ? "true":"false"); });
+}
+function stashLang(){
+  if(!current) return;
+  var o = current[curLang] || (current[curLang]={});
+  o.title=$("f_title").value; o.description=$("f_desc").value; o.potential=$("f_pot").value;
+  o.features=readList($("featlist"),false); o.nearby=readList($("nearlist"),false);
+}
+function loadLang(){
+  var o = current[curLang] || {};
+  $("f_title").value=o.title||""; $("f_desc").value=o.description||""; $("f_pot").value=o.potential||"";
+  $("featlist").innerHTML=""; (o.features||[]).forEach(function(f){ listRow($("featlist"), f, null, "จุดเด่น"); });
+  $("nearlist").innerHTML=""; (o.nearby||[]).forEach(function(f){ listRow($("nearlist"), f, null, "สถานที่ใกล้เคียง"); });
+}
+Array.prototype.forEach.call(document.querySelectorAll(".langtabs button"), function(b){
+  b.addEventListener("click", function(){ stashLang(); curLang=b.dataset.l; syncLangTabs(); loadLang(); });
+});
+$("addfeat").addEventListener("click", function(){ listRow($("featlist"), "", null, "จุดเด่น"); });
+$("addnear").addEventListener("click", function(){ listRow($("nearlist"), "", null, "สถานที่ใกล้เคียง"); });
+$("addimg").addEventListener("click", function(){ listRow($("imglist"), "", "", "/assets/img/…", "ALT text (คำอธิบายรูป)"); });
+$("uploadimg").addEventListener("click", function(){
+  if(!ghConnected()){ toast("เชื่อม GitHub ก่อน (แท็บ Connect) เพื่ออัปโหลดรูป"); return; }
+  $("imgfile").click();
+});
+$("imgfile").addEventListener("change", function(){
+  var files = Array.prototype.slice.call(this.files || []);
+  if(!files.length) return;
+  var hint = $("uploadhint"); var done = 0;
+  function safeName(n){ return n.toLowerCase().replace(/[^a-z0-9.\-]+/g,"-").replace(/-+/g,"-"); }
+  files.forEach(function(file){
+    var reader = new FileReader();
+    reader.onload = function(){
+      var b64 = reader.result.split(",")[1];
+      var fname = safeName(file.name);
+      var path = "assets/img/" + fname;
+      hint.textContent = "กำลังอัปโหลด " + fname + "…";
+      ghGetFile(path).catch(function(){ return null; }) // check if it exists to grab its sha; ignore 404
+        .then(function(){
+          return ghPutFile(path, b64, "Upload image " + fname + " via admin dashboard", true);
+        })
+        .then(function(){
+          listRow($("imglist"), "/" + path, "", "/assets/img/…", "ALT text — อธิบายรูปนี้");
+          done++;
+          hint.textContent = "อัปโหลดแล้ว " + done + "/" + files.length + " รูป ใส่ ALT text ให้แต่ละรูป แล้วกด Save";
+          toast("อัปโหลด " + fname + " สำเร็จ");
+        })
+        .catch(function(e){ toast("อัปโหลด " + fname + " ไม่สำเร็จ: " + e.message); });
+    };
+    reader.readAsDataURL(file);
+  });
+  this.value = "";
+});
+$("calcsize").addEventListener("click", function(){
+  var rai=num($("f_rai").value)||0, ngan=num($("f_ngan").value)||0;
+  var wah = rai*400 + ngan*100;
+  if(wah>0){ $("f_wah").value = wah; $("f_sqm").value = wah*4; }
+});
+function updateUrlPreview(){ $("urlpreview").textContent = "/en/property/"+($("f_slug").value||"…")+"/"; }
+$("f_slug").addEventListener("input", updateUrlPreview);
+$("f_title").addEventListener("blur", function(){
+  if(!$("f_slug").value && curLang==="en" && $("f_title").value){
+    $("f_slug").value = slugify($("f_title").value); updateUrlPreview(); }
+});
+$("save").addEventListener("click", function(){
+  stashLang();
+  var id=$("f_id").value.trim(), slug=slugify($("f_slug").value);
+  if(!id){ toast("กรุณากรอกรหัสประกาศ"); return; }
+  if(!slug){ toast("กรุณากรอก URL slug"); return; }
+  var clash = (db.properties||[]).some(function(p){ return p!==current && (p.slug===slug || p.id===id); });
+  if(clash){ toast("รหัสหรือ slug นี้ถูกใช้กับประกาศอื่นแล้ว"); return; }
+  current.id=id; current.slug=slug;
+  current.status=$("f_status").value; current.property_type=$("f_type").value;
+  current.location=$("f_location").value; current.featured=$("f_featured").value==="yes";
+  current.sample=$("f_sample").value==="yes";
+  current.district=$("f_district").value||locName($("f_location").value);
+  current.province=$("f_province").value||"Phuket";
+  current.price=num($("f_price").value); current.currency=$("f_currency").value||"THB";
+  current.rai=num($("f_rai").value); current.ngan=num($("f_ngan").value);
+  current.square_wah=num($("f_wah").value); current.square_meter=num($("f_sqm").value);
+  current.title_deed=$("f_deed").value; current.road_access=$("f_road").value;
+  current.electricity=$("f_elec").value; current.water=$("f_water").value; current.zoning=$("f_zoning").value;
+  current.distance_airport=$("f_dair").value; current.distance_beach=$("f_dbeach").value;
+  current.distance_attractions=$("f_dattr").value;
+  current.latitude=num($("f_lat").value); current.longitude=num($("f_lng").value);
+  current.video_url=$("f_video").value; current.map_url=$("f_map").value;
+  current.contact_name=$("f_cname").value; current.contact_phone=$("f_cphone").value; current.contact_email=$("f_cemail").value;
+  current.images=readList($("imglist"), true);
+  current.updated_at=today();
+  if(!current.created_at) current.created_at=today();
+  if((db.properties||[]).indexOf(current)===-1){ db.properties = db.properties||[]; db.properties.push(current); }
+  persist(); render(); $("editor").close();
+  toast(ghConnected() ? "บันทึกแล้ว กด Publish to website เพื่อเผยแพร่ขึ้นเว็บ" : "บันทึกแล้ว — อย่าลืมดาวน์โหลด properties.json แล้ว build ใหม่");
+});
+$("addnew").addEventListener("click", function(){ openEditor(null); });
+
+/* ---------- export / import ---------- */
+$("download").addEventListener("click", function(){
+  var blob = new Blob([JSON.stringify(db, null, 2)], {type:"application/json"});
+  var a = el("a",{href:URL.createObjectURL(blob), download:"properties.json"});
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast("ดาวน์โหลดแล้ว นำไปวางทับ data/properties.json แล้วรัน python3 build.py");
+});
+$("importbtn").addEventListener("click", function(){ $("importfile").click(); });
+$("importfile").addEventListener("change", function(){
+  var f=this.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){ try{ var j=JSON.parse(r.result);
+      if(!j.properties) throw new Error("no properties key");
+      db=j; persist(); render(); toast("นำเข้า "+j.properties.length+" ประกาศแล้ว");
+    }catch(e){ toast("ไฟล์นี้ไม่ใช่ properties.json ที่ถูกต้อง"); } };
+  r.readAsText(f);
+  this.value="";
+});
+window.addEventListener("beforeunload", function(e){ if(dirty){ e.preventDefault(); e.returnValue=""; } });
+
+function boot(){
+  fillLocationSelect();
+  ghLoadSettings();
+  if(ghConnected()){
+    $("gh_owner").value = gh.owner; $("gh_repo").value = gh.repo;
+    $("gh_branch").value = gh.branch; $("gh_token").value = gh.token;
+  }
+  ghUpdateStatusUI();
+  initIdentity();
+  load();
+}
+
+/* ---------- Netlify Identity (keeps the edge role-redirect session alive) ---------- */
+function initIdentity(){
+  function ready(fn){ if(window.netlifyIdentity) fn(); else setTimeout(function(){ ready(fn); }, 100); }
+  ready(function(){
+    function setJwtCookie(user){
+      if(!user){ document.cookie = "nf_jwt=; Max-Age=0; path=/"; return; }
+      user.jwt().then(function(token){
+        document.cookie = "nf_jwt=" + token + "; path=/; max-age=3600; SameSite=Lax";
+      });
+    }
+    function paintUser(user){
+      var box = $("idstatus");
+      if(user){
+        box.innerHTML = "";
+        box.appendChild(document.createTextNode("Signed in as " + user.email + " · "));
+        var out = el("a",{href:"#",text:"ออกจากระบบ",style:"color:#fff;text-decoration:underline"});
+        out.addEventListener("click", function(e){ e.preventDefault(); netlifyIdentity.logout(); });
+        box.appendChild(out);
+      } else {
+        box.textContent = "";
+      }
+    }
+    netlifyIdentity.on("init", function(user){ setJwtCookie(user); paintUser(user); });
+    netlifyIdentity.on("login", function(user){ setJwtCookie(user); paintUser(user); });
+    netlifyIdentity.on("logout", function(){ setJwtCookie(null); paintUser(null); window.location.href = "/admin-login.html"; });
+    netlifyIdentity.init();
+    // keep the cookie fresh so a long editing session doesn't get logged out by the edge redirect
+    setInterval(function(){ var u = netlifyIdentity.currentUser(); if(u) setJwtCookie(u); }, 20 * 60 * 1000);
+  });
+}
+if(!$("app").hidden) boot();
+})();
+</script>
+</body>
+</html>
