@@ -1,0 +1,32 @@
+# Netlify configuration — Andaman Land by Benz Supawat
+# This site is pre-built static HTML committed directly to the repo root,
+# so there is no build step — publish the repo as-is.
+[build]
+  publish = "."
+
+# Send "/" to the English site (a JS/meta redirect also exists in index.html)
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
+  force = false
+
+# Friendly 404 in English
+[[redirects]]
+  from = "/*"
+  to = "/en/404.html"
+  status = 404
+
+# Long cache for fingerprint-free static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"

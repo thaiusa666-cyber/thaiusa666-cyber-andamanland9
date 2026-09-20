@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Admin · Andaman Land by Benz Supawat</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml"/>
+<style>
+:root{
+  --ink:#0A2A31; --deep:#10454F; --sea:#1B6C79; --brass:#A8771F; --brass-l:#C89B3E;
+  --paper:#FCFBF8; --mist:#E3ECEC; --line:#CBD9D9; --text:#16303550; --danger:#9B2C2C;
+  --r:10px; box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:15px/1.55 ui-sans-serif,system-ui,"Karla","IBM Plex Sans Thai","Noto Sans SC",sans-serif}
+h1,h2,h3{font-family:ui-serif,Georgia,"Fraunces",serif;font-weight:600;line-height:1.2;margin:0 0 .5em}
+a{color:var(--sea)}
+header.top{background:var(--ink);color:#fff;padding:14px 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+header.top b{letter-spacing:.14em;font-size:14px}
+header.top span{opacity:.7;font-size:12px;display:block;letter-spacing:.02em}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 20px 80px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line);margin:0 0 22px}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:10px 14px;font:inherit;cursor:pointer;color:var(--deep)}
+.tabs button[aria-selected="true"]{border-color:var(--brass);font-weight:600;color:var(--ink)}
+.panel[hidden]{display:none}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.bar input[type=search]{flex:1;min-width:180px}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+label{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--deep);margin:0 0 5px}
+.btn{display:inline-block;border:1px solid var(--deep);background:var(--deep);color:#fff;padding:9px 16px;border-radius:999px;font:inherit;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn--brass{background:var(--brass);border-color:var(--brass)}
+.btn--ghost{background:transparent;color:var(--deep)}
+.btn--danger{background:transparent;border-color:var(--danger);color:var(--danger)}
+.btn--small{padding:6px 12px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--deep)}
+.tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:2px 9px;background:#fff}
+.tag--for-sale{border-color:#2F7D5B;color:#2F7D5B}
+.tag--reserved{border-color:var(--brass);color:var(--brass)}
+.tag--sold{border-color:var(--danger);color:var(--danger)}
+.tag--off-market{opacity:.65}
+.tag--sample{border-style:dashed}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+fieldset{border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:0 0 16px}
+legend{padding:0 8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass)}
+.note{background:var(--mist);border-left:3px solid var(--brass);padding:12px 14px;border-radius:0 8px 8px 0;font-size:14px}
+.muted{color:#4d6a6f;font-size:13px}
+dialog{border:0;border-radius:14px;padding:0;max-width:940px;width:calc(100% - 28px);box-shadow:0 30px 80px rgba(10,42,49,.35)}
+dialog::backdrop{background:rgba(6,24,29,.55)}
+.dlg-head{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;z-index:2}
+.dlg-body{padding:20px;max-height:70vh;overflow:auto}
+.dlg-foot{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:14px 20px;display:flex;gap:10px;justify-content:flex-end}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.langtabs{display:flex;gap:4px;margin-bottom:12px}
+.langtabs button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 14px;cursor:pointer;font:inherit}
+.langtabs button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.list-edit div{display:flex;gap:6px;margin-bottom:6px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:99}
+.toast.on{opacity:1}
+code{background:var(--mist);padding:1px 5px;border-radius:4px;font-size:13px}
+.login{max-width:380px;margin:12vh auto;padding:0 20px}
+@media (max-width:640px){
+  table thead{display:none}
+  table tr{display:block;border-bottom:1px solid var(--line);padding:10px 0}
+  table td{display:block;border:0;padding:3px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="login" id="login">
+  <h1>Admin</h1>
+  <p class="muted">Andaman Land by Benz Supawat</p>
+  <div class="card">
+    <label for="pw">Passcode</label>
+    <input id="pw" type="password" autocomplete="current-password"/>
+    <p style="margin:12px 0 0"><button class="btn btn--brass" id="pwgo" type="button">Enter</button></p>
+    <p class="muted" style="margin-top:12px">Default passcode: <code>andaman</code> — change it in <code>admin/index.html</code> (<code>PASSCODE</code>).</p>
+  </div>
+  <div class="note">This gate only hides the screen. It is <strong>not</strong> real security. Before going live, protect <code>/admin/</code> with Netlify Identity, Vercel password protection, or a Basic-Auth rule. See the README.</div>
+</div>
+
+<div id="app" hidden>
+<header class="top">
+  <div><b>ANDAMAN LAND</b><span>Admin dashboard</span></div>
+  <div class="row-actions">
+    <a class="btn btn--ghost btn--small" href="/en/" target="_blank" rel="noopener" style="color:#fff;border-color:rgba(255,255,255,.4)">View site</a>
+    <button class="btn btn--brass btn--small" id="download" type="button">Download properties.json</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="note" style="margin-bottom:20px">
+    Edits are kept in this browser until you press <strong>Download properties.json</strong>. Save that file over
+    <code>data/properties.json</code>, run <code>python3 build.py</code>, then upload <code>dist/</code>.
+    <span id="dirty" class="muted"></span>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" data-tab="properties" aria-selected="true">Properties</button>
+    <button role="tab" data-tab="locations" aria-selected="false">Locations</button>
+    <button role="tab" data-tab="articles" aria-selected="false">Articles</button>
+    <button role="tab" data-tab="leads" aria-selected="false">Inquiries / leads</button>
+    <button role="tab" data-tab="help" aria-selected="false">Help</button>
+  </div>
+
+  <!-- PROPERTIES -->
+  <section class="panel" id="panel-properties">
+    <div class="bar">
+      <input type="search" id="q" placeholder="Search by ID, title, location…" aria-label="Search properties"/>
+      <select id="fstatus" style="max-width:180px" aria-label="Filter by status">
+        <option value="">All statuses</option>
+        <option value="for-sale">For Sale</option>
+        <option value="reserved">Reserved</option>
+        <option value="sold">Sold</option>
+        <option value="off-market">Off Market</option>
+      </select>
+      <button class="btn btn--brass" id="addnew" type="button">+ Add property</button>
+      <label style="display:none" for="importfile">Import</label>
+      <button class="btn btn--ghost" id="importbtn" type="button">Import JSON</button>
+      <input id="importfile" type="file" accept="application/json" hidden/>
+    </div>
+    <p class="muted" id="count"></p>
+    <table>
+      <thead><tr><th>ID</th><th>Title (EN)</th><th>Location</th><th>Type</th><th>Price</th><th>Size</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="panel" id="panel-locations" hidden>
+    <h2>Location pages</h2>
+    <p class="muted">Nine SEO location pages are generated in all three languages. Counts below are live from your property list.</p>
+    <table><thead><tr><th>Slug</th><th>Name</th><th>Properties</th><th>Page</th></tr></thead><tbody id="locrows"></tbody></table>
+    <div class="card" style="margin-top:20px">
+      <h3>Edit location text</h3>
+      <p class="muted">Intro paragraphs, typical plots, nearby list and FAQ for each area live in
+      <code>src/content_pages.py</code> → <code>LOCATION_COPY["slug"]["en" | "th" | "zh"]</code>.
+      Edit that file, save, then run <code>python3 build.py</code>. To add a brand-new area, add its slug to
+      <code>LOCATION_PAGES</code> in <code>src/data.py</code> and add matching copy in all three languages.</p>
+    </div>
+  </section>
+
+  <!-- ARTICLES -->
+  <section class="panel" id="panel-articles" hidden>
+    <h2>Buying-guide articles</h2>
+    <p class="muted">Ten articles, each published in English, Thai and Chinese.</p>
+    <table><thead><tr><th>Slug</th><th>Title (EN)</th><th>Read</th></tr></thead><tbody id="artrows"></tbody></table>
+    <div class="card" style="margin-top:20px">
+      <h3>Add or edit an article</h3>
+      <p class="muted">Articles live in <code>src/content_articles.py</code> in the <code>ARTICLES</code> list. Copy an existing
+      entry, change <code>slug</code>, and fill <code>title / meta / lead / sections / faq</code> for <code>en</code>, <code>th</code> and
+      <code>zh</code>. Run <code>python3 build.py</code>. The article, its FAQ schema and the sitemap update automatically.
+      Keep legal wording cautious and never state that foreigners may own land without restriction.</p>
+    </div>
+  </section>
+
+  <!-- LEADS -->
+  <section class="panel" id="panel-leads" hidden>
+    <h2>Inquiries / leads</h2>
+    <div class="note">Form submissions are <strong>not</strong> stored in this browser. Where they land depends on how you wired the forms:</div>
+    <div class="card" style="margin-top:16px">
+      <h3>Netlify Forms (default)</h3>
+      <p class="muted">Netlify dashboard → your site → <strong>Forms</strong> → <code>property-enquiry</code> and <code>contact</code>.
+      Set an email notification there so every lead reaches your inbox. Each submission includes the Property ID,
+      name, nationality, email, WhatsApp, preferred contact method and message.</p>
+      <h3 style="margin-top:18px">Custom endpoint</h3>
+      <p class="muted">If you set <code>SITE["form_endpoint"]</code> in <code>src/data.py</code> (Formspree, Getform, your own API),
+      leads appear in that service's dashboard instead.</p>
+    </div>
+    <div class="card">
+      <h3>Property ID reference</h3>
+      <p class="muted">Every enquiry carries a Property ID so you know which plot it is about.</p>
+      <table><thead><tr><th>ID</th><th>Title (EN)</th><th>Status</th></tr></thead><tbody id="leadrows"></tbody></table>
+    </div>
+  </section>
+
+  <!-- HELP -->
+  <section class="panel" id="panel-help" hidden>
+    <h2>How this works</h2>
+    <div class="card">
+      <ol>
+        <li>Open this page, add or edit a property, press <strong>Save</strong>.</li>
+        <li>Press <strong>Download properties.json</strong> at the top right.</li>
+        <li>Replace <code>data/properties.json</code> in the project with the downloaded file.</li>
+        <li>Run <code>python3 build.py</code> in the project folder.</li>
+        <li>Upload the <code>dist/</code> folder to Netlify (or push to Git and let it build).</li>
+      </ol>
+      <p class="muted">No database, no server, no monthly fee. Pages are real HTML, so Google reads the title, price,
+      location and description without running JavaScript.</p>
+    </div>
+    <div class="card">
+      <h3>Images</h3>
+      <p class="muted">Put photos in <code>assets/img/</code> with descriptive, SEO-friendly filenames such as
+      <code>land-for-sale-thalang-phuket-001.jpg</code> — never <code>IMG_1234.jpg</code>. In the property editor add each image
+      as a path (<code>/assets/img/your-file.jpg</code>) plus an ALT text that honestly describes the photo.
+      If a property has no images, the site falls back to a generated illustration so nothing is broken.</p>
+      <h3 style="margin-top:18px">Rule: never invent data</h3>
+      <p class="muted">Leave price, size, coordinates and utilities empty until you have the real figures. Empty fields
+      render as "Price on application" instead of a made-up number. Delete the <code>sample</code> flag once a listing holds
+      real information.</p>
+    </div>
+  </section>
+</div>
+</div>
+
+<dialog id="editor">
+  <form method="dialog" id="editform">
+    <div class="dlg-head"><h2 id="dlgtitle" style="margin:0">Edit property</h2>
+      <button class="btn btn--ghost btn--small" value="cancel" type="submit">Close</button></div>
+    <div class="dlg-body">
+      <fieldset><legend>Identity</legend>
+        <div class="grid3">
+          <div><label for="f_id">Property ID</label><input id="f_id" required/></div>
+          <div><label for="f_slug">URL slug</label><input id="f_slug" required pattern="[a-z0-9\-]+"/></div>
+          <div><label for="f_status">Status</label><select id="f_status">
+            <option value="for-sale">For Sale</option><option value="reserved">Reserved</option>
+            <option value="sold">Sold</option><option value="off-market">Off Market</option></select></div>
+          <div><label for="f_type">Property type</label><select id="f_type">
+            <option value="land">Land</option><option value="development-land">Development land</option>
+            <option value="beachfront-land">Beachfront land</option><option value="investment-land">Investment land</option>
+            <option value="commercial-land">Commercial land</option></select></div>
+          <div><label for="f_location">Location</label><select id="f_location"></select></div>
+          <div><label for="f_featured">Featured on home</label><select id="f_featured">
+            <option value="no">No</option><option value="yes">Yes</option></select></div>
+          <div><label for="f_sample">Sample placeholder</label><select id="f_sample">
+            <option value="no">No — real listing</option><option value="yes">Yes — show SAMPLE badge</option></select></div>
+          <div><label for="f_district">District</label><input id="f_district"/></div>
+          <div><label for="f_province">Province</label><input id="f_province"/></div>
+        </div>
+        <p class="muted" style="margin:10px 0 0">URL will be <code id="urlpreview">/en/property/…/</code></p>
+      </fieldset>
+
+      <fieldset><legend>Price &amp; size — leave blank if unknown</legend>
+        <div class="grid3">
+          <div><label for="f_price">Price</label><input id="f_price" type="number" min="0" step="1" placeholder="blank = on application"/></div>
+          <div><label for="f_currency">Currency</label><input id="f_currency" placeholder="THB"/></div>
+          <div><label for="f_rai">Rai</label><input id="f_rai" type="number" min="0" step="0.01"/></div>
+          <div><label for="f_ngan">Ngan</label><input id="f_ngan" type="number" min="0" step="0.01"/></div>
+          <div><label for="f_wah">Square wah</label><input id="f_wah" type="number" min="0" step="0.01"/></div>
+          <div><label for="f_sqm">Square metre</label><input id="f_sqm" type="number" min="0" step="0.01"/></div>
+        </div>
+        <p class="muted" style="margin:10px 0 0"><button class="btn btn--ghost btn--small" type="button" id="calcsize">Calculate sq.wah &amp; sq.m from rai/ngan</button> (1 rai = 4 ngan = 400 sq.wah = 1,600 m²)</p>
+      </fieldset>
+
+      <fieldset><legend>Land facts</legend>
+        <div class="grid2">
+          <div><label for="f_deed">Title document</label><input id="f_deed"/></div>
+          <div><label for="f_road">Road access</label><input id="f_road"/></div>
+          <div><label for="f_elec">Electricity</label><input id="f_elec"/></div>
+          <div><label for="f_water">Water</label><input id="f_water"/></div>
+          <div><label for="f_zoning">Zoning colour</label><input id="f_zoning"/></div>
+          <div><label for="f_dair">Distance to airport</label><input id="f_dair"/></div>
+          <div><label for="f_dbeach">Distance to beach</label><input id="f_dbeach"/></div>
+          <div><label for="f_dattr">Distance to attractions</label><input id="f_dattr"/></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>Map &amp; media</legend>
+        <div class="grid3">
+          <div><label for="f_lat">Latitude</label><input id="f_lat" type="number" step="0.000001" placeholder="blank = hide map"/></div>
+          <div><label for="f_lng">Longitude</label><input id="f_lng" type="number" step="0.000001"/></div>
+          <div><label for="f_video">Video URL (YouTube)</label><input id="f_video" type="url" placeholder="https://www.youtube.com/watch?v=…"/></div>
+        </div>
+        <div style="margin-top:12px"><label for="f_map">Google Maps link (optional — built from coordinates if blank)</label><input id="f_map" type="url"/></div>
+        <div style="margin-top:14px">
+          <label>Photo gallery</label>
+          <div id="imglist" class="list-edit"></div>
+          <button class="btn btn--ghost btn--small" type="button" id="addimg">+ Add image</button>
+          <p class="muted">Path then ALT text, e.g. <code>/assets/img/land-for-sale-thalang-phuket-001.jpg</code> · “Land for sale in Thalang Phuket”. Upload the file itself into <code>assets/img/</code>.</p>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>Contact shown on this listing</legend>
+        <div class="grid3">
+          <div><label for="f_cname">Contact name</label><input id="f_cname"/></div>
+          <div><label for="f_cphone">Contact phone</label><input id="f_cphone"/></div>
+          <div><label for="f_cemail">Contact email</label><input id="f_cemail"/></div>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>Content by language</legend>
+        <div class="langtabs" role="tablist">
+          <button type="button" role="tab" data-l="en" aria-selected="true">English</button>
+          <button type="button" role="tab" data-l="th" aria-selected="false">ไทย</button>
+          <button type="button" role="tab" data-l="zh" aria-selected="false">中文</button>
+        </div>
+        <div><label for="f_title">Title</label><input id="f_title"/></div>
+        <div style="margin-top:12px"><label for="f_desc">Description</label><textarea id="f_desc"></textarea></div>
+        <div style="margin-top:12px"><label for="f_pot">Development potential</label><textarea id="f_pot" style="min-height:70px"></textarea></div>
+        <div style="margin-top:12px"><label>Features</label><div id="featlist" class="list-edit"></div>
+          <button class="btn btn--ghost btn--small" type="button" id="addfeat">+ Add feature</button></div>
+        <div style="margin-top:14px"><label>Nearby places</label><div id="nearlist" class="list-edit"></div>
+          <button class="btn btn--ghost btn--small" type="button" id="addnear">+ Add nearby place</button></div>
+        <p class="muted" style="margin-top:12px">Fill all three languages. Anything left blank falls back to the English text.</p>
+      </fieldset>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn btn--ghost" value="cancel" type="submit">Cancel</button>
+      <button class="btn btn--brass" type="button" id="save">Save property</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+"use strict";
+/* ---- Change this passcode. It only hides the UI; use real auth in production. ---- */
+var PASSCODE = "andaman";
+
+var LOCATIONS = [["phuket","Phuket"],["thalang","Thalang"],["cherng-talay","Cherng Talay"],
+  ["bang-tao","Bang Tao"],["kamala","Kamala"],["rawai","Rawai"],["nai-harn","Nai Harn"],
+  ["kata","Kata"],["karon","Karon"],["phuket-town","Phuket Town"],["other","Other areas"]];
+var PAGE_LOCATIONS = ["phuket","thalang","cherng-talay","bang-tao","kamala","rawai","nai-harn","kata","karon"];
+var ARTICLES = [
+ ["can-foreigners-buy-land-in-thailand","Can foreigners buy land in Thailand?"],
+ ["buying-property-in-phuket-guide-for-foreign-buyers","Buying property in Phuket: a guide for foreign buyers"],
+ ["freehold-vs-leasehold-in-thailand","Freehold vs leasehold in Thailand"],
+ ["how-to-buy-property-in-phuket","How to buy property in Phuket"],
+ ["property-due-diligence-in-thailand","Property due diligence in Thailand"],
+ ["costs-of-buying-property-in-thailand","Costs of buying property in Thailand"],
+ ["investing-in-phuket-property","Investing in Phuket property"],
+ ["best-areas-to-invest-in-phuket","Best areas to invest in Phuket"],
+ ["land-development-opportunities-in-phuket","Land development opportunities in Phuket"],
+ ["things-to-check-before-buying-land-in-phuket","Things to check before buying land in Phuket"]];
+var STORE = "andaman-admin-properties";
+var db = {_README:"", properties:[]}, current = null, curLang = "en", dirty = false;
+
+function $(id){ return document.getElementById(id); }
+function el(tag,attrs,kids){ var n=document.createElement(tag); attrs=attrs||{};
+  for(var k in attrs){ if(k==="text") n.textContent=attrs[k]; else n.setAttribute(k,attrs[k]); }
+  (kids||[]).forEach(function(c){ n.appendChild(c); }); return n; }
+function toast(msg){ var t=$("toast"); t.textContent=msg; t.classList.add("on");
+  setTimeout(function(){ t.classList.remove("on"); }, 2200); }
+function today(){ return new Date().toISOString().slice(0,10); }
+function num(v){ if(v===""||v===null||v===undefined) return null; var n=Number(v); return isNaN(n)?null:n; }
+function slugify(s){ return (s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,""); }
+function locName(s){ for(var i=0;i<LOCATIONS.length;i++){ if(LOCATIONS[i][0]===s) return LOCATIONS[i][1]; } return s||""; }
+function markDirty(){ dirty=true; $("dirty").textContent="· unsaved changes are stored in this browser"; }
+
+/* ---------- login ---------- */
+function unlock(){
+  if($("pw").value !== PASSCODE){ toast("Wrong passcode"); return; }
+  try{ sessionStorage.setItem("andaman-admin","1"); }catch(e){}
+  $("login").hidden = true; $("app").hidden = false; boot();
+}
+$("pwgo").addEventListener("click", unlock);
+$("pw").addEventListener("keydown", function(e){ if(e.key==="Enter") unlock(); });
+try{ if(sessionStorage.getItem("andaman-admin")==="1"){ $("login").hidden=true; $("app").hidden=false; } }catch(e){}
+
+/* ---------- data ---------- */
+function load(){
+  var local=null;
+  try{ local = localStorage.getItem(STORE); }catch(e){}
+  if(local){ try{ db = JSON.parse(local); dirty=true; markDirty(); render(); return; }catch(e){} }
+  fetch("properties.json").then(function(r){ return r.json(); })
+    .then(function(j){ db = j; render(); })
+    .catch(function(){
+      fetch("/admin/properties.json").then(function(r){return r.json();})
+        .then(function(j){ db=j; render(); })
+        .catch(function(){ toast("Could not load properties.json — start a local server (see README)"); render(); });
+    });
+}
+function persist(){ try{ localStorage.setItem(STORE, JSON.stringify(db)); }catch(e){} markDirty(); }
+
+/* ---------- tabs ---------- */
+Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function(b){
+  b.addEventListener("click", function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function(o){ o.setAttribute("aria-selected", o===b ? "true":"false"); });
+    Array.prototype.forEach.call(document.querySelectorAll('.panel'), function(p){ p.hidden = true; });
+    $("panel-"+b.dataset.tab).hidden = false;
+  });
+});
+
+/* ---------- render ---------- */
+function statusTag(s){ var labels={"for-sale":"For sale","reserved":"Reserved","sold":"Sold","off-market":"Off market"};
+  return el("span",{"class":"tag tag--"+s, text: labels[s]||s}); }
+
+function render(){
+  var q = ($("q").value||"").toLowerCase(), fs = $("fstatus").value;
+  var tb = $("rows"); tb.innerHTML="";
+  var list = (db.properties||[]).filter(function(p){
+    if(fs && p.status!==fs) return false;
+    if(!q) return true;
+    var hay = [p.id,p.slug,p.location,p.property_type,(p.en&&p.en.title)||""].join(" ").toLowerCase();
+    return hay.indexOf(q)>-1;
+  });
+  $("count").textContent = list.length + " of " + (db.properties||[]).length + " properties";
+  list.forEach(function(p){
+    var tr = el("tr");
+    tr.appendChild(el("td",{text:p.id||""}));
+    var tdt = el("td"); tdt.appendChild(el("strong",{text:(p.en&&p.en.title)||"(no title)"}));
+    if(p.sample) tdt.appendChild(el("span",{"class":"tag tag--sample",text:"SAMPLE",style:"margin-left:6px"}));
+    if(p.featured) tdt.appendChild(el("span",{"class":"tag",text:"FEATURED",style:"margin-left:6px"}));
+    tdt.appendChild(el("div",{"class":"muted",text:"/en/property/"+(p.slug||"")+"/"}));
+    tr.appendChild(tdt);
+    tr.appendChild(el("td",{text:locName(p.location)}));
+    tr.appendChild(el("td",{text:(p.property_type||"").replace(/-/g," ")}));
+    tr.appendChild(el("td",{text: p.price ? (p.currency||"THB")+" "+Number(p.price).toLocaleString("en-US") : "On application"}));
+    tr.appendChild(el("td",{text: p.rai ? p.rai+" rai" : (p.square_meter ? p.square_meter+" m²" : "—")}));
+    var tds = el("td"); tds.appendChild(statusTag(p.status||"for-sale")); tr.appendChild(tds);
+    var tda = el("td"); var box = el("div",{"class":"row-actions"});
+    var eb = el("button",{"class":"btn btn--ghost btn--small",type:"button",text:"Edit"});
+    eb.addEventListener("click", function(){ openEditor(p); });
+    var sel = el("select",{"aria-label":"Change status", style:"width:auto;padding:5px 8px;font-size:13px"});
+    [["for-sale","For Sale"],["reserved","Reserved"],["sold","Sold"],["off-market","Off Market"]].forEach(function(o){
+      var op = el("option",{value:o[0],text:o[1]}); if((p.status||"for-sale")===o[0]) op.selected=true; sel.appendChild(op); });
+    sel.addEventListener("change", function(){ p.status=sel.value; p.updated_at=today(); persist(); render(); toast("Status updated"); });
+    var db_ = el("button",{"class":"btn btn--ghost btn--small",type:"button",text:"Duplicate"});
+    db_.addEventListener("click", function(){ var c=JSON.parse(JSON.stringify(p));
+      c.id = nextId(); c.slug = (p.slug||"listing")+"-copy"; c.featured=false; c.created_at=today(); c.updated_at=today();
+      db.properties.push(c); persist(); render(); toast("Duplicated"); });
+    var xb = el("button",{"class":"btn btn--danger btn--small",type:"button",text:"Delete"});
+    xb.addEventListener("click", function(){
+      if(!confirm("Delete "+p.id+"? Sold listings are usually kept (set status to Sold) so the page stays live for SEO.")) return;
+      db.properties = db.properties.filter(function(x){ return x!==p; }); persist(); render(); toast("Deleted"); });
+    [eb,sel,db_,xb].forEach(function(n){ box.appendChild(n); });
+    tda.appendChild(box); tr.appendChild(tda);
+    tb.appendChild(tr);
+  });
+  renderLocations(); renderArticles(); renderLeads();
+}
+function renderLocations(){
+  var tb=$("locrows"); tb.innerHTML="";
+  PAGE_LOCATIONS.forEach(function(s){
+    var n=(db.properties||[]).filter(function(p){ return p.location===s; }).length;
+    var tr=el("tr");
+    tr.appendChild(el("td",{text:s}));
+    tr.appendChild(el("td",{text:locName(s)}));
+    tr.appendChild(el("td",{text:String(n)}));
+    var td=el("td"); var a=el("a",{href:"/en/locations/"+s+"/",target:"_blank",rel:"noopener",text:"Open"}); td.appendChild(a); tr.appendChild(td);
+    tb.appendChild(tr);
+  });
+}
+function renderArticles(){
+  var tb=$("artrows"); tb.innerHTML="";
+  ARTICLES.forEach(function(a){
+    var tr=el("tr"); tr.appendChild(el("td",{text:a[0]})); tr.appendChild(el("td",{text:a[1]}));
+    var td=el("td"); td.appendChild(el("a",{href:"/en/buying-guide/"+a[0]+"/",target:"_blank",rel:"noopener",text:"Open"})); tr.appendChild(td);
+    tb.appendChild(tr);
+  });
+}
+function renderLeads(){
+  var tb=$("leadrows"); tb.innerHTML="";
+  (db.properties||[]).forEach(function(p){
+    var tr=el("tr"); tr.appendChild(el("td",{text:p.id||""}));
+    tr.appendChild(el("td",{text:(p.en&&p.en.title)||""}));
+    var td=el("td"); td.appendChild(statusTag(p.status||"for-sale")); tr.appendChild(td);
+    tb.appendChild(tr);
+  });
+}
+$("q").addEventListener("input", render);
+$("fstatus").addEventListener("change", render);
+
+/* ---------- editor ---------- */
+function nextId(){
+  var max=0; (db.properties||[]).forEach(function(p){
+    var m=/(\d+)$/.exec(p.id||""); if(m) max=Math.max(max, parseInt(m[1],10)); });
+  return "AL-"+String(max+1).padStart(3,"0");
+}
+function blank(){
+  var n = nextId();
+  function pack(){ return {title:"",description:"",features:[],nearby:[],potential:""}; }
+  return {id:n, slug:"", sample:false, status:"for-sale", featured:false, price:null, currency:"THB",
+    location:"thalang", district:"", province:"Phuket", rai:null, ngan:null, square_wah:null, square_meter:null,
+    property_type:"land", title_deed:"", road_access:"", electricity:"", water:"", zoning:"",
+    latitude:null, longitude:null, map_url:"", video_url:"",
+    distance_airport:"", distance_beach:"", distance_attractions:"", images:[],
+    created_at:today(), updated_at:today(),
+    contact_name:"Benz Supawat", contact_phone:"[ADD PHONE]", contact_email:"[ADD EMAIL]",
+    en:pack(), th:pack(), zh:pack()};
+}
+function listRow(container, a, b, phA, phB){
+  var row = el("div");
+  var i1 = el("input",{value:a||"",placeholder:phA||""});
+  row.appendChild(i1);
+  var i2 = null;
+  if(phB!==undefined){ i2 = el("input",{value:b||"",placeholder:phB}); row.appendChild(i2); }
+  var x = el("button",{"class":"btn btn--danger btn--small",type:"button",text:"×"});
+  x.addEventListener("click", function(){ container.removeChild(row); });
+  row.appendChild(x);
+  container.appendChild(row);
+  return row;
+}
+function readList(container, pair){
+  var out=[];
+  Array.prototype.forEach.call(container.children, function(row){
+    var ins = row.querySelectorAll("input");
+    if(pair){ if(ins[0].value.trim()) out.push({src:ins[0].value.trim(), alt:(ins[1]&&ins[1].value.trim())||""}); }
+    else { if(ins[0].value.trim()) out.push(ins[0].value.trim()); }
+  });
+  return out;
+}
+function fillLocationSelect(){
+  var s=$("f_location"); s.innerHTML="";
+  LOCATIONS.forEach(function(l){ s.appendChild(el("option",{value:l[0],text:l[1]})); });
+}
+function openEditor(p){
+  current = p ? p : blank();
+  var isNew = !p;
+  $("dlgtitle").textContent = isNew ? "Add property" : ("Edit " + (current.id||""));
+  fillLocationSelect();
+  $("f_id").value=current.id||""; $("f_slug").value=current.slug||"";
+  $("f_status").value=current.status||"for-sale"; $("f_type").value=current.property_type||"land";
+  $("f_location").value=current.location||"thalang";
+  $("f_featured").value=current.featured?"yes":"no"; $("f_sample").value=current.sample?"yes":"no";
+  $("f_district").value=current.district||""; $("f_province").value=current.province||"Phuket";
+  $("f_price").value=current.price==null?"":current.price; $("f_currency").value=current.currency||"THB";
+  $("f_rai").value=current.rai==null?"":current.rai; $("f_ngan").value=current.ngan==null?"":current.ngan;
+  $("f_wah").value=current.square_wah==null?"":current.square_wah; $("f_sqm").value=current.square_meter==null?"":current.square_meter;
+  $("f_deed").value=current.title_deed||""; $("f_road").value=current.road_access||"";
+  $("f_elec").value=current.electricity||""; $("f_water").value=current.water||""; $("f_zoning").value=current.zoning||"";
+  $("f_dair").value=current.distance_airport||""; $("f_dbeach").value=current.distance_beach||"";
+  $("f_dattr").value=current.distance_attractions||"";
+  $("f_lat").value=current.latitude==null?"":current.latitude; $("f_lng").value=current.longitude==null?"":current.longitude;
+  $("f_video").value=current.video_url||""; $("f_map").value=current.map_url||"";
+  $("f_cname").value=current.contact_name||""; $("f_cphone").value=current.contact_phone||""; $("f_cemail").value=current.contact_email||"";
+  $("imglist").innerHTML="";
+  (current.images||[]).forEach(function(im){
+    if(typeof im === "string") listRow($("imglist"), im, "", "/assets/img/…", "ALT text");
+    else listRow($("imglist"), im.src, im.alt, "/assets/img/…", "ALT text");
+  });
+  curLang="en"; syncLangTabs(); loadLang();
+  updateUrlPreview();
+  $("editor").showModal();
+}
+function syncLangTabs(){
+  Array.prototype.forEach.call(document.querySelectorAll(".langtabs button"), function(b){
+    b.setAttribute("aria-selected", b.dataset.l===curLang ? "true":"false"); });
+}
+function stashLang(){
+  if(!current) return;
+  var o = current[curLang] || (current[curLang]={});
+  o.title=$("f_title").value; o.description=$("f_desc").value; o.potential=$("f_pot").value;
+  o.features=readList($("featlist"),false); o.nearby=readList($("nearlist"),false);
+}
+function loadLang(){
+  var o = current[curLang] || {};
+  $("f_title").value=o.title||""; $("f_desc").value=o.description||""; $("f_pot").value=o.potential||"";
+  $("featlist").innerHTML=""; (o.features||[]).forEach(function(f){ listRow($("featlist"), f, null, "Feature"); });
+  $("nearlist").innerHTML=""; (o.nearby||[]).forEach(function(f){ listRow($("nearlist"), f, null, "Nearby place"); });
+}
+Array.prototype.forEach.call(document.querySelectorAll(".langtabs button"), function(b){
+  b.addEventListener("click", function(){ stashLang(); curLang=b.dataset.l; syncLangTabs(); loadLang(); });
+});
+$("addfeat").addEventListener("click", function(){ listRow($("featlist"), "", null, "Feature"); });
+$("addnear").addEventListener("click", function(){ listRow($("nearlist"), "", null, "Nearby place"); });
+$("addimg").addEventListener("click", function(){ listRow($("imglist"), "", "", "/assets/img/…", "ALT text"); });
+$("calcsize").addEventListener("click", function(){
+  var rai=num($("f_rai").value)||0, ngan=num($("f_ngan").value)||0;
+  var wah = rai*400 + ngan*100;
+  if(wah>0){ $("f_wah").value = wah; $("f_sqm").value = wah*4; }
+});
+function updateUrlPreview(){ $("urlpreview").textContent = "/en/property/"+($("f_slug").value||"…")+"/"; }
+$("f_slug").addEventListener("input", updateUrlPreview);
+$("f_title").addEventListener("blur", function(){
+  if(!$("f_slug").value && curLang==="en" && $("f_title").value){
+    $("f_slug").value = slugify($("f_title").value); updateUrlPreview(); }
+});
+$("save").addEventListener("click", function(){
+  stashLang();
+  var id=$("f_id").value.trim(), slug=slugify($("f_slug").value);
+  if(!id){ toast("Property ID is required"); return; }
+  if(!slug){ toast("URL slug is required"); return; }
+  var clash = (db.properties||[]).some(function(p){ return p!==current && (p.slug===slug || p.id===id); });
+  if(clash){ toast("Another property already uses that ID or slug"); return; }
+  current.id=id; current.slug=slug;
+  current.status=$("f_status").value; current.property_type=$("f_type").value;
+  current.location=$("f_location").value; current.featured=$("f_featured").value==="yes";
+  current.sample=$("f_sample").value==="yes";
+  current.district=$("f_district").value||locName($("f_location").value);
+  current.province=$("f_province").value||"Phuket";
+  current.price=num($("f_price").value); current.currency=$("f_currency").value||"THB";
+  current.rai=num($("f_rai").value); current.ngan=num($("f_ngan").value);
+  current.square_wah=num($("f_wah").value); current.square_meter=num($("f_sqm").value);
+  current.title_deed=$("f_deed").value; current.road_access=$("f_road").value;
+  current.electricity=$("f_elec").value; current.water=$("f_water").value; current.zoning=$("f_zoning").value;
+  current.distance_airport=$("f_dair").value; current.distance_beach=$("f_dbeach").value;
+  current.distance_attractions=$("f_dattr").value;
+  current.latitude=num($("f_lat").value); current.longitude=num($("f_lng").value);
+  current.video_url=$("f_video").value; current.map_url=$("f_map").value;
+  current.contact_name=$("f_cname").value; current.contact_phone=$("f_cphone").value; current.contact_email=$("f_cemail").value;
+  current.images=readList($("imglist"), true);
+  current.updated_at=today();
+  if(!current.created_at) current.created_at=today();
+  if((db.properties||[]).indexOf(current)===-1){ db.properties = db.properties||[]; db.properties.push(current); }
+  persist(); render(); $("editor").close();
+  toast("Saved — remember to download properties.json and rebuild");
+});
+$("addnew").addEventListener("click", function(){ openEditor(null); });
+
+/* ---------- export / import ---------- */
+$("download").addEventListener("click", function(){
+  var blob = new Blob([JSON.stringify(db, null, 2)], {type:"application/json"});
+  var a = el("a",{href:URL.createObjectURL(blob), download:"properties.json"});
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast("Downloaded. Replace data/properties.json, then run python3 build.py");
+});
+$("importbtn").addEventListener("click", function(){ $("importfile").click(); });
+$("importfile").addEventListener("change", function(){
+  var f=this.files[0]; if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){ try{ var j=JSON.parse(r.result);
+      if(!j.properties) throw new Error("no properties key");
+      db=j; persist(); render(); toast("Imported "+j.properties.length+" properties");
+    }catch(e){ toast("That file is not a valid properties.json"); } };
+  r.readAsText(f);
+  this.value="";
+});
+window.addEventListener("beforeunload", function(e){ if(dirty){ e.preventDefault(); e.returnValue=""; } });
+
+function boot(){ fillLocationSelect(); load(); }
+if(!$("app").hidden) boot();
+})();
+</script>
+</body>
+</html>
