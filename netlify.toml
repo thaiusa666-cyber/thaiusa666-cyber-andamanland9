@@ -1,10 +1,12 @@
 # Netlify configuration — Andaman Land by Benz Supawat
-# This site is pre-built static HTML committed directly to the repo root,
-# so there is no build step — publish the repo as-is.
 [build]
-  publish = "."
+  publish = "dist"
+  command = "python3 build.py"
 
-# Send "/" to the English site (a JS/meta redirect also exists in index.html)
+[build.environment]
+  PYTHON_VERSION = "3.11"
+
+# Send "/" to the English site (a JS/meta redirect also exists in dist/index.html)
 [[redirects]]
   from = "/"
   to = "/en/"
