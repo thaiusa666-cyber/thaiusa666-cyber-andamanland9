@@ -1,1 +1,54 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>Andaman Land by Benz Supawat</title><link rel="canonical" href="https://www.andamanland-example.com/en/"/><meta http-equiv="refresh" content="0; url=/en/"/><meta name="robots" content="noindex,follow"/></head><body><p>Redirecting to <a href="/en/">English site</a>. <a href="/th/">ภาษาไทย</a> · <a href="/zh/">中文</a></p><script>(function(){try{var l=localStorage.getItem("al_lang");if(l&&["en","th","zh"].indexOf(l)>-1){location.replace("/"+l+"/");return;}}catch(e){}location.replace("/en/");})();</script></body></html>
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ประกาศอสังหาริมทรัพย์อันดามัน" />
+    <title>Andaman Land | บ้านและที่ดิน</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">ANDAMAN LAND</a>
+      <a class="admin-link" href="/admin/" aria-label="เข้าสู่ระบบจัดการข้อมูล">จัดการข้อมูล</a>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">PROPERTY COLLECTION</p>
+        <h1>บ้านและที่ดินที่คัดสรร<br />เพื่อชีวิตที่คุณเลือกได้</h1>
+        <p class="intro-copy">เลือกดูบ้านพักอาศัยและที่ดินในทำเลน่าอยู่ พร้อมข้อมูลราคาและรายละเอียดครบถ้วน</p>
+      </section>
+
+      <section class="listings" aria-labelledby="listing-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AVAILABLE NOW</p>
+            <h2 id="listing-title">ประกาศแนะนำ</h2>
+          </div>
+          <p id="listing-count" class="listing-count"></p>
+        </div>
+        <div id="property-list" class="property-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>ANDAMAN LAND</span>
+      <a href="/admin/">จัดการประกาศ</a>
+    </footer>
+
+    <template id="property-template">
+      <article class="property-card">
+        <img class="property-image" alt="" loading="lazy" />
+        <div class="property-content">
+          <p class="property-location"></p>
+          <h3 class="property-title"></h3>
+          <p class="property-price"></p>
+          <dl class="property-facts"></dl>
+          <p class="property-description"></p>
+        </div>
+      </article>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>
